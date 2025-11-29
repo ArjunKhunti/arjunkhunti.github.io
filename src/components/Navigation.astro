@@ -1,0 +1,291 @@
+---
+import { NAV_LINKS, PERSONAL_INFO } from '../utils/constants';
+---
+
+<nav class="nav" id="navigation">
+  <div class="container">
+    <div class="nav-content">
+      <!-- Logo/Name -->
+      <a href="#" class="nav-logo">
+        <span class="gradient-text">{PERSONAL_INFO.name}</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <ul class="nav-links">
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a href={link.href} class="nav-link">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-nav-links">
+      {NAV_LINKS.map((link) => (
+        <li>
+          <a href={link.href} class="mobile-nav-link">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-base);
+  }
+  
+  .nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) 0;
+  }
+  
+  .nav-logo {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    text-decoration: none;
+    transition: transform var(--transition-base);
+  }
+  
+  .nav-logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--space-8);
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+  
+  .nav-link {
+    position: relative;
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    color: var(--gray-700);
+    text-decoration: none;
+    transition: color var(--transition-base);
+    padding: var(--space-2) 0;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width var(--transition-base);
+  }
+  
+  .nav-link:hover {
+    color: var(--accent-blue);
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .nav-link.active {
+    color: var(--accent-blue);
+  }
+  
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  @media (min-width: 768px) {
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+  
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    width: 24px;
+    height: 2px;
+    background: var(--gray-700);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+  }
+  
+  .hamburger {
+    position: relative;
+  }
+  
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  
+  .hamburger::before {
+    top: -8px;
+  }
+  
+  .hamburger::after {
+    top: 8px;
+  }
+  
+  .mobile-menu-btn.active .hamburger {
+    background: transparent;
+  }
+  
+  .mobile-menu-btn.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  
+  .mobile-menu-btn.active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-base);
+  }
+  
+  .mobile-menu.active {
+    max-height: 400px;
+  }
+  
+  .mobile-nav-links {
+    list-style: none;
+    padding: var(--space-4) 0;
+    margin: 0;
+  }
+  
+  .mobile-nav-link {
+    display: block;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-lg);
+    font-weight: var(--font-medium);
+    color: var(--gray-700);
+    text-decoration: none;
+    transition: all var(--transition-base);
+  }
+  
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    color: var(--accent-blue);
+    background: var(--gray-50);
+  }
+</style>
+
+<script>
+  // Navigation scroll effect
+  const nav = document.getElementById('navigation');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  
+  // Add scroll effect to navigation
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+  });
+  
+  // Mobile menu toggle
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    mobileMenu?.classList.toggle('active');
+  });
+  
+  // Close mobile menu when clicking a link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn?.classList.remove('active');
+      mobileMenu?.classList.remove('active');
+    });
+  });
+  
+  // Active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  
+  function setActiveLink() {
+    const scrollY = window.pageYOffset;
+    
+    sections.forEach(section => {
+      const sectionHeight = section.offsetHeight;
+      const sectionTop = section.offsetTop - 100;
+      const sectionId = section.getAttribute('id');
+      
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', setActiveLink);
+</script>

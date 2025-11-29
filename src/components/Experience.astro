@@ -1,0 +1,176 @@
+---
+import { EXPERIENCE } from '../utils/constants';
+---
+
+<section class="experience section" id="experience">
+  <div class="container">
+    <h2 class="section-title text-center">Experience</h2>
+    <p class="section-subtitle text-center">
+      My professional journey and key achievements
+    </p>
+    
+    <div class="experience-content">
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        
+        <div class="experience-card">
+          <div class="timeline-marker"></div>
+          
+          <div class="card-header">
+            <h3 class="company-name">{EXPERIENCE.company}</h3>
+            <span class="position">{EXPERIENCE.position}</span>
+            <div class="meta">
+              <span class="duration">{EXPERIENCE.duration}</span>
+              <span class="location">{EXPERIENCE.location}</span>
+            </div>
+          </div>
+          
+          <div class="achievements">
+            {EXPERIENCE.achievements.map((achievement) => (
+              <div class="achievement-item">
+                <h4 class="achievement-title">{achievement.title}</h4>
+                <p class="achievement-description">{achievement.description}</p>
+                <div class="tech-tags">
+                  {achievement.technologies.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background: var(--gray-50);
+  }
+  
+  .section-subtitle {
+    color: var(--gray-600);
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-12);
+  }
+  
+  .experience-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .timeline {
+    position: relative;
+    padding-left: var(--space-8);
+  }
+  
+  .timeline-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gradient-primary);
+  }
+  
+  .experience-card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-8);
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    left: calc(-1 * var(--space-8) - 8px);
+    top: var(--space-8);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 4px var(--accent-blue);
+  }
+  
+  .card-header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  
+  .company-name {
+    font-size: var(--text-3xl);
+    color: var(--gray-900);
+    margin-bottom: var(--space-2);
+  }
+  
+  .position {
+    display: block;
+    font-size: var(--text-xl);
+    color: var(--accent-blue);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-3);
+  }
+  
+  .meta {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+  }
+  
+  .achievements {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  
+  .achievement-item {
+    padding: var(--space-4);
+    border-left: 3px solid var(--accent-cyan);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+  }
+  
+  .achievement-title {
+    font-size: var(--text-lg);
+    color: var(--gray-900);
+    margin-bottom: var(--space-2);
+  }
+  
+  .achievement-description {
+    color: var(--gray-700);
+    margin-bottom: var(--space-3);
+  }
+  
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  
+  .tech-tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    background: var(--white);
+    color: var(--accent-blue);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--accent-blue);
+  }
+  
+  @media (max-width: 767px) {
+    .timeline {
+      padding-left: var(--space-6);
+    }
+    
+    .timeline-marker {
+      left: calc(-1 * var(--space-6) - 8px);
+    }
+  }
+</style>
