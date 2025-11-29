@@ -6,5 +6,6 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://arjunkhunti.github.io',
-  integrations: [react()]
+  integrations: [react()],
+  outDir: './dist'
 });
