@@ -2,36 +2,38 @@
 import { PERSONAL_INFO, TYPING_SKILLS } from '../utils/constants';
 ---
 
-<section class="hero" id="hero">
-  <div class="hero-background"></div>
+<section class="hero" id="home">
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-name animate-fadeInDown">{PERSONAL_INFO.name}</h1>
-      <p class="hero-title animate-fadeInUp">{PERSONAL_INFO.title}</p>
-      <p class="hero-tagline animate-fadeInUp">{PERSONAL_INFO.tagline}</p>
-      
-      <div class="hero-typing animate-fadeIn">
-        <span id="typing-text"></span>
-        <span class="cursor">|</span>
+      <div class="hero-text">
+        <span class="greeting animate-fadeIn">Welcome to my Magical Realm</span>
+        <h1 class="name animate-fadeInUp">
+          I am <span class="gradient-text">{PERSONAL_INFO.name}</span>
+        </h1>
+        <h2 class="title animate-fadeInUp" style="animation-delay: 0.2s">
+          {PERSONAL_INFO.title}
+        </h2>
+        <p class="description animate-fadeInUp" style="animation-delay: 0.4s">
+          {PERSONAL_INFO.tagline}
+        </p>
+        
+        <div class="hero-actions animate-fadeInUp" style="animation-delay: 0.6s">
+          <a href="#projects" class="btn btn-primary">
+            <span>View Spellbook</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </a>
+          <a href={PERSONAL_INFO.resumeUrl} download="Arjun_Khunti_Resume.pdf" class="btn btn-secondary">
+            <span>Download Scroll</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          </a>
+        </div>
       </div>
       
-      <div class="hero-cta animate-fadeInUp">
-        <a href={PERSONAL_INFO.resumeUrl} download class="btn btn-primary btn-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          Download Resume
-        </a>
-        <a href="#contact" class="btn btn-secondary btn-lg">Get In Touch</a>
-      </div>
-      
-      <div class="scroll-indicator animate-float">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 5v14"></path>
-          <path d="m19 12-7 7-7-7"></path>
-        </svg>
+      <div class="hero-image animate-float">
+        <div class="image-wrapper">
+          <div class="wizard-circle"></div>
+          <img src="/assets/profile.png" alt={PERSONAL_INFO.name} />
+        </div>
       </div>
     </div>
   </div>
@@ -39,114 +41,138 @@ import { PERSONAL_INFO, TYPING_SKILLS } from '../utils/constants';
 
 <style>
   .hero {
-    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-top: var(--space-20);
+    background: radial-gradient(circle at top right, rgba(116, 0, 1, 0.1), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(26, 71, 42, 0.1), transparent 40%);
+    position: relative;
     overflow: hidden;
-    padding-top: 80px;
   }
-  
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--gradient-hero);
-    z-index: -1;
-  }
-  
-  .hero-background::before {
+
+  /* Magical Particles Background (Pseudo-elements) */
+  .hero::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-    animation: pulse 8s ease-in-out infinite;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: -1;
   }
   
   .hero-content {
-    text-align: center;
-    color: var(--white);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  .hero-name {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: var(--font-black);
-    margin-bottom: var(--space-4);
-    background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation-delay: 0.1s;
-  }
-  
-  .hero-title {
-    font-size: clamp(1.25rem, 4vw, 2rem);
-    font-weight: var(--font-semibold);
-    color: var(--accent-cyan);
-    margin-bottom: var(--space-3);
-    animation-delay: 0.2s;
-  }
-  
-  .hero-tagline {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: var(--gray-200);
-    margin-bottom: var(--space-8);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    animation-delay: 0.3s;
-  }
-  
-  .hero-typing {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    font-weight: var(--font-medium);
-    color: var(--accent-blue);
-    margin-bottom: var(--space-12);
-    min-height: 2em;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
     align-items: center;
-    justify-content: center;
-    gap: var(--space-1);
-    animation-delay: 0.4s;
   }
   
-  .cursor {
-    animation: blink 1s infinite;
+  @media (min-width: 1024px) {
+    .hero-content {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
   }
   
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+  .greeting {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--accent-blue);
+    margin-bottom: var(--space-4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
   
-  .hero-cta {
+  .name {
+    font-family: var(--font-heading);
+    font-size: var(--text-5xl);
+    line-height: 1.1;
+    margin-bottom: var(--space-4);
+    color: var(--primary-navy);
+    text-shadow: 5px 5px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (min-width: 768px) {
+    .name {
+      font-size: var(--text-7xl);
+    }
+  }
+  
+  .title {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    color: var(--gray-600);
+    margin-bottom: var(--space-6);
+    font-weight: var(--font-medium);
+  }
+  
+  @media (min-width: 768px) {
+    .title {
+      font-size: var(--text-3xl);
+    }
+  }
+  
+  .description {
+    font-size: var(--text-lg);
+    color: var(--gray-700);
+    max-width: 600px;
+    margin-bottom: var(--space-8);
+  }
+  
+  .hero-actions {
     display: flex;
-    gap: var(--space-4);
-    justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: var(--space-16);
-    animation-delay: 0.5s;
+    gap: var(--space-4);
   }
   
-  .scroll-indicator {
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .image-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: var(--radius-full);
+    padding: var(--space-4);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-2xl);
+  }
+  
+  @media (min-width: 768px) {
+    .image-wrapper {
+      width: 400px;
+      height: 400px;
+    }
+  }
+  
+  .wizard-circle {
     position: absolute;
-    bottom: var(--space-8);
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    color: var(--white);
-    opacity: 0.7;
-    cursor: pointer;
-    transition: opacity var(--transition-base);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed var(--accent-gold);
+    animation: spin 20s linear infinite;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    position: relative;
+    z-index: 1;
   }
   
   .scroll-indicator:hover {

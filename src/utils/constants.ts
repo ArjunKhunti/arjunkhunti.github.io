@@ -1,24 +1,23 @@
 // Personal Information
 export const PERSONAL_INFO = {
     name: 'Arjun Khunti',
-    title: 'Senior Software Engineer',
-    tagline: 'Building Scalable Solutions with AI & Full-Stack Expertise',
+    title: 'Senior Software Wizard',
+    tagline: 'Brewing Scalable Solutions with AI & Full-Stack Sorcery',
     email: 'arjunvkhunti@gmail.com',
     phone: '+91 9714556094',
     location: 'Ahmedabad, Gujarat',
     linkedin: 'https://www.linkedin.com/in/arjunkhunti',
     github: 'https://github.com/arjunkhunti',
-    resumeUrl: '/resume.pdf',
+    resumeUrl: '/assets/resume.pdf',
 };
 
 // Navigation Links
 export const NAV_LINKS = [
-    { label: 'About', href: '#about' },
-    { label: 'Companies', href: '#companies' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'The Wizard', href: '#about' },
+    { label: 'Alliances', href: '#companies' },
+    { label: 'Wizarding Proficiency', href: '#skills' },
+    { label: 'Magical Creations', href: '#projects' },
+    { label: 'Send Owl', href: '#contact' },
 ];
 
 // Skills Data

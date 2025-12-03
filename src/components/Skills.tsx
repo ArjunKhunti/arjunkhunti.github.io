@@ -1,71 +1,32 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { SKILLS } from '../utils/constants';
 
-// SVG Icon Component
-const SkillIcon = ({ name }: { name: string }) => {
-    // Simple placeholder SVG icons - you can replace with actual icons
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="9" x2="15" y2="15"></line>
-            <line x1="15" y1="9" x2="9" y2="15"></line>
-        </svg>
-    );
-};
-
 export default function Skills() {
-    const [activeCategory, setActiveCategory] = useState<string>('all');
-
-    const categories = [
-        { id: 'all', label: 'All Skills' },
-        { id: 'languages', label: 'Languages' },
-        { id: 'frameworks', label: 'Frameworks' },
-        { id: 'cloud', label: 'Cloud & DevOps' },
-        { id: 'ai', label: 'AI & ML' },
-        { id: 'tools', label: 'Tools' },
+    const skillCategories = [
+        { id: 'languages', label: 'Programming Languages', skills: SKILLS.languages, icon: '💻' },
+        { id: 'frameworks', label: 'Frameworks & Libraries', skills: SKILLS.frameworks, icon: '⚡' },
+        { id: 'cloud', label: 'Cloud & DevOps', skills: SKILLS.cloud, icon: '☁️' },
+        { id: 'ai', label: 'AI & Machine Learning', skills: SKILLS.ai, icon: '🤖' },
+        { id: 'tools', label: 'Development Tools', skills: SKILLS.tools, icon: '🛠️' },
     ];
-
-    const getAllSkills = () => {
-        if (activeCategory === 'all') {
-            return [
-                ...SKILLS.languages,
-                ...SKILLS.frameworks,
-                ...SKILLS.cloud,
-                ...SKILLS.ai,
-                ...SKILLS.tools,
-            ];
-        }
-        return SKILLS[activeCategory as keyof typeof SKILLS] || [];
-    };
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.05,
+                staggerChildren: 0.1,
             },
         },
     };
 
-    const itemVariants = {
-        hidden: { opacity: 0, scale: 0.8 },
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
-            scale: 1,
+            y: 0,
             transition: {
-                duration: 0.4,
+                duration: 0.5,
             },
         },
     };
@@ -73,49 +34,129 @@ export default function Skills() {
     return (
         <section className="skills section" id="skills">
             <div className="container">
-                <h2 className="section-title text-center">Skills & Expertise</h2>
+                <h2 className="section-title text-center">Wizarding Proficiency</h2>
                 <p className="section-subtitle text-center">
-                    Technologies and tools I work with
+                    Magical abilities and enchantments I've mastered
                 </p>
 
-                {/* Category Filters */}
-                <div className="skills-filters">
-                    {categories.map((category) => (
-                        <button
-                            key={category.id}
-                            className={`filter-btn ${activeCategory === category.id ? 'active' : ''}`}
-                            onClick={() => setActiveCategory(category.id)}
-                        >
-                            {category.label}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Skills Grid */}
                 <motion.div
-                    className="skills-grid"
+                    className="skills-cards"
                     variants={containerVariants}
                     initial="hidden"
-                    animate="visible"
-                    key={activeCategory}
+                    whileInView="visible"
+                    viewport={{ once: true }}
                 >
-                    {getAllSkills().map((skill, index) => (
+                    {skillCategories.map((category) => (
                         <motion.div
-                            key={`${skill.name}-${index}`}
-                            className="skill-card"
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            transition={{ duration: 0.2 }}
+                            key={category.id}
+                            className="skill-category-card glass"
+                            variants={cardVariants}
+                            whileHover={{ y: -8, scale: 1.02 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            <div className="skill-icon">
-                                <SkillIcon name={skill.icon} />
+                            <div className="card-header">
+                                <span className="category-icon">{category.icon}</span>
+                                <h3 className="category-title">{category.label}</h3>
                             </div>
-                            <h3 className="skill-name">{skill.name}</h3>
-                            <span className="skill-level">{skill.level}</span>
+                            <ul className="skills-list">
+                                {category.skills.map((skill, index) => (
+                                    <li key={index} className="skill-item">
+                                        <span className="skill-bullet">✦</span>
+                                        <span className="skill-name">{skill.name}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </motion.div>
                     ))}
                 </motion.div>
             </div>
+
+            <style>{`
+                .skills-cards {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: var(--space-4);
+                    margin-top: var(--space-12);
+                }
+
+                @media (max-width: 1200px) {
+                    .skills-cards {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .skills-cards {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                .skill-category-card {
+                    background: rgba(255, 255, 255, 0.8);
+                    border-radius: var(--radius-xl);
+                    padding: var(--space-4);
+                    transition: all var(--transition-base);
+                    border: 1px solid rgba(116, 0, 1, 0.1);
+                }
+
+                .card-header {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: var(--space-2);
+                    margin-bottom: var(--space-4);
+                    padding-bottom: var(--space-3);
+                    border-bottom: 2px solid var(--accent-gold);
+                }
+
+                .category-icon {
+                    font-size: var(--text-2xl);
+                }
+
+                .category-title {
+                    font-family: var(--font-heading);
+                    font-size: var(--text-sm);
+                    color: var(--primary-navy);
+                    margin: 0;
+                    text-align: center;
+                    line-height: 1.2;
+                }
+
+                .skills-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space-1);
+                }
+
+                .skill-item {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--space-2);
+                    padding: var(--space-1);
+                    border-radius: var(--radius-md);
+                    transition: background var(--transition-base);
+                }
+
+                .skill-item:hover {
+                    background: rgba(116, 0, 1, 0.05);
+                }
+
+                .skill-bullet {
+                    color: var(--accent-purple);
+                    font-size: var(--text-sm);
+                    flex-shrink: 0;
+                }
+
+                .skill-name {
+                    font-weight: var(--font-medium);
+                    color: var(--gray-800);
+                    font-size: var(--text-sm);
+                    line-height: 1.3;
+                }
+            `}</style>
         </section>
     );
 }

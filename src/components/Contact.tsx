@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '../utils/constants';
 
 export default function Contact() {
@@ -9,17 +10,17 @@ export default function Contact() {
         message: '',
     });
 
-    const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setStatus('sending');
+        setFormStatus('submitting');
 
         // Simulate form submission - replace with actual implementation
         setTimeout(() => {
-            setStatus('success');
+            setFormStatus('success');
             setFormData({ name: '', email: '', subject: '', message: '' });
-            setTimeout(() => setStatus('idle'), 3000);
+            setTimeout(() => setFormStatus('idle'), 3000);
         }, 1000);
     };
 
@@ -33,91 +34,116 @@ export default function Contact() {
     return (
         <section className="contact section" id="contact">
             <div className="container">
-                <h2 className="section-title text-center">Get In Touch</h2>
+                <h2 className="section-title text-center">Send me an Owl</h2>
                 <p className="section-subtitle text-center">
-                    Let's discuss your next project or opportunity
+                    Have a magical inquiry or just want to say hello?
                 </p>
 
                 <div className="contact-content">
                     {/* Contact Form */}
-                    <div className="contact-form-wrapper">
+                    <motion.div
+                        className="contact-form-wrapper"
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <form className="contact-form" onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label htmlFor="name">Name</label>
+                                <label htmlFor="name">Wizard Name</label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
+                                    placeholder="Harry Potter"
                                     required
-                                    placeholder="Your name"
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Owl Address (Email)</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    placeholder="harry@hogwarts.edu"
                                     required
-                                    placeholder="your.email@example.com"
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="subject">Subject</label>
+                                <label htmlFor="subject">Subject of Scroll</label>
                                 <input
                                     type="text"
                                     id="subject"
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
+                                    placeholder="Regarding the Dark Arts..."
                                     required
-                                    placeholder="What's this about?"
                                 />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="message">Message</label>
+                                <label htmlFor="message">Scroll Content</label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
+                                    placeholder="Write your magical message here..."
                                     required
-                                    rows={5}
-                                    placeholder="Your message..."
                                 ></textarea>
                             </div>
 
                             <button
                                 type="submit"
-                                className="btn btn-primary btn-lg"
-                                disabled={status === 'sending'}
+                                className="btn btn-primary"
+                                disabled={formStatus === 'submitting'}
                             >
-                                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                                {formStatus === 'submitting' ? 'Sending Owl...' : 'Send Owl'}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
                             </button>
 
-                            {status === 'success' && (
+                            {formStatus === 'success' && (
                                 <div className="form-message success">
-                                    Message sent successfully! I'll get back to you soon.
+                                    Owl sent successfully! I'll get back to you soon.
                                 </div>
                             )}
 
-                            {status === 'error' && (
+                            {formStatus === 'error' && (
                                 <div className="form-message error">
-                                    Something went wrong. Please try again.
+                                    The owl got lost! Please try again later.
                                 </div>
                             )}
                         </form>
-                    </div>
+                    </motion.div>
 
                     {/* Contact Info */}
-                    <div className="contact-info">
+                    <motion.div
+                        className="contact-info"
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                    >
                         <div className="info-card">
                             <div className="info-icon">
                                 <svg
@@ -135,54 +161,10 @@ export default function Contact() {
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>Email</h4>
+                            <div className="info-content">
+                                <h4>Owl Post</h4>
                                 <a href={`mailto:${PERSONAL_INFO.email}`}>{PERSONAL_INFO.email}</a>
-                            </div>
-                        </div>
-
-                        <div className="info-card">
-                            <div className="info-icon">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Phone</h4>
-                                <a href={`tel:${PERSONAL_INFO.phone}`}>{PERSONAL_INFO.phone}</a>
-                            </div>
-                        </div>
-
-                        <div className="info-card">
-                            <div className="info-icon">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                    <circle cx="12" cy="10" r="3"></circle>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Location</h4>
-                                <p>{PERSONAL_INFO.location}</p>
+                                {/* <p>Send a digital scroll anytime</p> */}
                             </div>
                         </div>
 
@@ -204,14 +186,40 @@ export default function Contact() {
                                     <circle cx="4" cy="4" r="2"></circle>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>LinkedIn</h4>
+                            <div className="info-content">
+                                <h4>Wizarding Network</h4>
                                 <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer">
-                                    View Profile
+                                    LinkedIn Profile
                                 </a>
+                                {/* <p>Connect with me professionally</p> */}
                             </div>
                         </div>
-                    </div>
+
+                        <div className="info-card">
+                            <div className="info-icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                            </div>
+                            <div className="info-content">
+                                <h4>Code Grimoire</h4>
+                                <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer">
+                                    GitHub Profile
+                                </a>
+                                {/* <p>Explore my open source spells</p> */}
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
