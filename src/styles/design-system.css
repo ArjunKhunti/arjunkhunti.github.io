@@ -187,3 +187,28 @@
   /* Red Border */
   --glass-blur: blur(12px);
 }
+
+/* ===== Mobile Optimizations ===== */
+@media (max-width: 767px) {
+  :root {
+    /* Reduce font sizes for mobile */
+    --text-base: 1rem;
+    /* 16px - reduced from 18px */
+    --text-lg: 1.125rem;
+    /* 18px - reduced from 20px */
+    --text-xl: 1.25rem;
+    /* 20px - reduced from 24px */
+    --text-2xl: 1.5rem;
+    /* 24px - reduced from 30px */
+    --text-3xl: 1.875rem;
+    /* 30px - reduced from 36px */
+    --text-4xl: 2.25rem;
+    /* 36px - reduced from 48px */
+    --text-5xl: 2.5rem;
+    /* 40px - reduced from 60px */
+    --text-6xl: 3rem;
+    /* 48px - reduced from 72px */
+    --text-7xl: 3.5rem;
+    /* 56px - reduced from 96px */
+  }
+}

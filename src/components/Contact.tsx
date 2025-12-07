@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '../utils/constants';
+import './Contact.module.css';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -8,20 +9,61 @@ export default function Contact() {
         email: '',
         subject: '',
         message: '',
+        honeypot: '', // Anti-spam field
     });
 
     const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setFormStatus('submitting');
 
-        // Simulate form submission - replace with actual implementation
-        setTimeout(() => {
-            setFormStatus('success');
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setTimeout(() => setFormStatus('idle'), 3000);
-        }, 1000);
+        // Honeypot check - if filled, it's a bot
+        if (formData.honeypot) {
+            return;
+        }
+
+        setFormStatus('submitting');
+        setErrorMessage('');
+
+        try {
+            const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+            if (!accessKey) {
+                throw new Error('Web3Forms access key not configured');
+            }
+
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                    from_name: 'Portfolio Contact Form',
+                    to_email: 'arjunvkhunti@gmail.com',
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setFormStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '', honeypot: '' });
+                setTimeout(() => setFormStatus('idle'), 5000);
+            } else {
+                throw new Error(result.message || 'Failed to send message');
+            }
+        } catch (error) {
+            setFormStatus('error');
+            setErrorMessage(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+            setTimeout(() => setFormStatus('idle'), 5000);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -49,6 +91,17 @@ export default function Contact() {
                         transition={{ duration: 0.6 }}
                     >
                         <form className="contact-form" onSubmit={handleSubmit}>
+                            {/* Honeypot field - hidden from users */}
+                            <input
+                                type="text"
+                                name="honeypot"
+                                value={formData.honeypot}
+                                onChange={handleChange}
+                                style={{ display: 'none' }}
+                                tabIndex={-1}
+                                autoComplete="off"
+                            />
+
                             <div className="form-group">
                                 <label htmlFor="name">Wizard Name</label>
                                 <input
@@ -59,6 +112,8 @@ export default function Contact() {
                                     onChange={handleChange}
                                     placeholder="Harry Potter"
                                     required
+                                    minLength={2}
+                                    maxLength={100}
                                 />
                             </div>
 
@@ -85,6 +140,8 @@ export default function Contact() {
                                     onChange={handleChange}
                                     placeholder="Regarding the Dark Arts..."
                                     required
+                                    minLength={3}
+                                    maxLength={200}
                                 />
                             </div>
 
@@ -97,41 +154,66 @@ export default function Contact() {
                                     onChange={handleChange}
                                     placeholder="Write your magical message here..."
                                     required
+                                    minLength={10}
+                                    maxLength={1000}
                                 ></textarea>
                             </div>
 
-                            <button
+                            <motion.button
                                 type="submit"
                                 className="btn btn-primary"
                                 disabled={formStatus === 'submitting'}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                {formStatus === 'submitting' ? 'Sending Owl...' : 'Send Owl'}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                </svg>
-                            </button>
+                                {formStatus === 'submitting' ? (
+                                    <>
+                                        <span>Sending Owl...</span>
+                                        <svg className="spinner" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                        </svg>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>Send Owl</span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </>
+                                )}
+                            </motion.button>
 
                             {formStatus === 'success' && (
-                                <div className="form-message success">
-                                    Owl sent successfully! I'll get back to you soon.
-                                </div>
+                                <motion.div
+                                    className="form-message success"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                >
+                                    ✨ Owl sent successfully! I'll get back to you soon.
+                                </motion.div>
                             )}
 
                             {formStatus === 'error' && (
-                                <div className="form-message error">
-                                    The owl got lost! Please try again later.
-                                </div>
+                                <motion.div
+                                    className="form-message error"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                >
+                                    ⚠️ {errorMessage || 'The owl got lost! Please try again later.'}
+                                </motion.div>
                             )}
                         </form>
                     </motion.div>
@@ -164,7 +246,6 @@ export default function Contact() {
                             <div className="info-content">
                                 <h4>Owl Post</h4>
                                 <a href={`mailto:${PERSONAL_INFO.email}`}>{PERSONAL_INFO.email}</a>
-                                {/* <p>Send a digital scroll anytime</p> */}
                             </div>
                         </div>
 
@@ -191,7 +272,6 @@ export default function Contact() {
                                 <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer">
                                     LinkedIn Profile
                                 </a>
-                                {/* <p>Connect with me professionally</p> */}
                             </div>
                         </div>
 
@@ -216,12 +296,26 @@ export default function Contact() {
                                 <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer">
                                     GitHub Profile
                                 </a>
-                                {/* <p>Explore my open source spells</p> */}
                             </div>
                         </div>
                     </motion.div>
                 </div>
             </div>
+
+            <style>{`
+                .spinner {
+                    animation: spin 1s linear infinite;
+                }
+
+                @keyframes spin {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+            `}</style>
         </section>
     );
 }

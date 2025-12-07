@@ -8,7 +8,7 @@ export const PERSONAL_INFO = {
     location: 'Ahmedabad, Gujarat',
     linkedin: 'https://www.linkedin.com/in/arjunkhunti',
     github: 'https://github.com/arjunkhunti',
-    resumeUrl: '/assets/resume.pdf',
+    resumeUrl: '/assets/personal/resume.pdf',
 };
 
 // Navigation Links
@@ -71,7 +71,7 @@ export const COMPANIES = [
 export const EXPERIENCE = {
     company: 'Crest Data Systems',
     position: 'Senior Software Engineer',
-    duration: 'Dec 2019 – Present',
+    duration: 'Dec 2019 - Present',
     location: 'Ahmedabad, India',
     achievements: [
         {

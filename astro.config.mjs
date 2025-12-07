@@ -7,5 +7,29 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://arjunkhunti.github.io',
   integrations: [react()],
-  outDir: './dist'
+  outDir: './dist',
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      minify: 'esbuild', // Faster than terser
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'framer-motion': ['framer-motion'],
+          },
+        },
+      },
+    },
+    ssr: {
+      noExternal: ['framer-motion'],
+    },
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+  compressHTML: true,
 });

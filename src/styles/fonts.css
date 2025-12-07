@@ -1,0 +1,82 @@
+/* Local Fonts - Cinzel */
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-400.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-500.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-600.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-700.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-800.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('/fonts/cinzel-v26-900.ttf') format('truetype');
+}
+
+/* Local Fonts - JetBrains Mono */
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/jetbrains-mono-v24-400.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/jetbrains-mono-v24-500.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/jetbrains-mono-v24-600.ttf') format('truetype');
+}
+
+/* Local Fonts - MedievalSharp */
+@font-face {
+    font-family: 'MedievalSharp';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/medievalsharp-v28-400.ttf') format('truetype');
+}

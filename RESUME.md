@@ -1,103 +1,62 @@
-**ARJUN** **KHUNTI**
+# ARJUN KHUNTI
+
+## Senior Software Engineer
+
+### +91 97145 56094
+
+```
+arjunvkhunti@gmail.com
+linkedin.com/in/arjunkhunti
+github.com/arjunkhunti
+```
+## SUMMARY
+
+```
+Senior Software Engineer & Security Architect specializing in building enterprise-grade security automation ecosystems and high-volume backend platforms for Fortune-100 SaaS companies including Splunk , Netskope , Mimecast , StrongDM & Align Technology. Expert in GoLang , Python , Kubernetes , and designing resilient simulation infrastructures. Proven track record of reducing manual security operations by 80-95% and architecting workflows that scale to handle millions of telemetry events.
+```
+## TECHNICAL SKILLS
+
+```
+Languages : Go (Golang), Python, JavaScript, SQL
+Frameworks : React.js, Gin, Flask, FastAPI, gRPC
+Cloud & DevOps : AWS, Kubernetes (K8s), Docker, Terraform, Event-Driven Arch
+Databases : PostgreSQL, Redis, MariaDB, ClickHouse
+Observability & Tools : Splunk, LLM Integration, GitLab CI, Git, Jira
+```
+## EXPERIENCE
+
+## Crest Data
 
 Senior Software Engineer
+Apr 2023 - Present
+_Ahmedabad, India_
+● **License Provisioning System:** Engineered a high-availability license provisioning tool for **Netskope** , a leading cloud security platform, slashing manual workflows by **95%** and dramatically boosting operational efficiency.
+● **Engineering Leadership:** Led the R&D phase for an internal AI platform, architecting the proof-of-concept and establishing **GenAI coding standards** that are now being adopted by the wider engineering team.
+● **Data Simulation Pipeline:** Architected a high-throughput **AWS** telemetry pipeline for **Mimecast** , generating **1M+** daily events to validate integrations across **15+ security platforms** (CrowdStrike, Palo Alto, Okta), ensuring resilience at enterprise scale.
+● **Security Automation & DAST:** Spearheaded & designed a cloud-agnostic DAST scanning framework using **GoLang** , **k8s** , and **Terraform** to enforce security standards across AWS and GCP for **Splunk’s** observability platform.
 
-Contact Number: +91 9714556094
+## Crest Data
 
-Address: Ahmedabad, Gujarat
+Software Engineer
+Dec 2019 - Apr 2023
+_Ahmedabad, India_
+● **MS Teams Access App:** Developed a widely adopted Microsoft Teams application for **StrongDM** using **GoLang** , enabling real-time user permission validation for external stakeholders.
+● **Security Testing Framework:** Architected an automation framework for **Splunk** integrated with **GitLab CI** and **Python** , utilizing the attack-range tool for continuous security content validation.
+● **Report Automation:** Created a **ReactJS** and **Python** web application for **Align Technology** to automate report generation and email distribution, significantly enhancing reporting efficiency.
+● **Jira Synchronization Engine:** Built an internal synchronization service using **GoLang** and **ReactJS** to replicate user worklogs across disparate Jira servers, cutting manual data entry efforts by **90%.**
 
-Email: arjunvkhunti@gmail.com
+## EDUCATION
 
-LinkedIn: [linkedin.com/in/arjunkhunti](https://www.linkedin.com/in/arjunkhunti)
+```
+B.Tech in Information Technology
+Birla Vishvakarma Mahavidyalaya
+```
+### 2016 - 2020
 
-SUMMARY
+## HONORS & AWARDS
 
-Result-driven Senior Software Engineer with more than 4 years of
-experience in Full-Stack Development and a strong background in Python,
-GoLang, and JavaScript. Proven track record in translating complex
-business requirements into innovative software solutions. Skilled in
-lead-ing successful projects and using machine learning techniques to
-drive enhanced outcomes. Certified in relevant technologies,
-demonstrating commitment to continuous learning and professional growth.
+```
+● CAP Award: Recognized for outstanding delivery of the ESCU security automation project at Crest Data.
+● Expert Speaker: Invited as an expert speaker on "Cross-platform Application Development (Flutter)" at Birla Vishvakarma Mahavidyalaya.
+```
 
-EXPERIENCE
-
-> **Senior** **Software** **Engineer** Crest Data
-
-Dec 2019 – Present Ahmedabad, India
-
-> • Engineered a popular Microsoft Teams app in **GoLang**, widely used
-> by multiple teams and stakeholders, demonstrating expertise in
-> scalable and reliable software development.
->
-> • Initiated and spearheaded **AI** **projects**, mentored employees,
-> and managed an AI team, fostering innovation and development within
-> the business unit.
->
-> • Directed and executed an automation project to streamline secret creation and rotation,
-> reducing manual efforts and errors by 80%.
->
-> • Established and managed a team to implement CSI and DAST security
-> standards using **GoLang**, ensuring compliance across **AWS,**
-> **GCP,** **and** **Kubernetes** environments.
->
-> • Developed a **ReactJS** and **Python** web application to automate
-> report generation and email distribution, significantly enhancing
-> reporting efficiency.
->
-> • Built an automated system using **ReactJS** and **GoLang** to
-> synchronize user worklogs between Jira servers, cutting manual efforts
-> by 90%.
->
-> • Architected and developed an automation framework integrated with
-> **GitLab** **CI** and **Python**, using the attack-range tool for
-> con-tinuous security content validation.
->
-> • Coordinated with cross-functional teams globally to develop CI/CD
-> pipelines for Splunk Add-ons using **Jenkins**, **Selenium**, and
-> **Python**, reducing manual testing efforts by 75%.
-
-INTERNSHIPS
-
-> **Invisible** **Fiction** Anand, Gujarat
->
-> • Developed assests and models for an AR/VR project and games in
-> Unity.
->
-> **Sannibh** **Technology** Vadodara, Gujarat
->
-> • Built a web application to manage and host events.
-
-EDUCATION
-
-> **Birla** **Vishvakarma** **Mahavidyalaya** BTech in Information
-> Technology
-> Anand, Gujarat Aug 2016 – Apr 2020
-
-
-> **Sigma** **Public** **School** Higher Secondary
-
-> Porbandar, Gujarat Apr 2016
-
-TECHNICAL SKILLS
-
-> **Languages** : Python, GoLang, JavaScript, HTML, CSS **Frameworks** : ReactJs, Flask, FAST, Gin, Mux
-> **Deployment Techs** : AWS, Kubernetes, Terraform, Docker
-> **Data ntelligence** : Machine Learning, Deep Learning, AI,
-LLM
-> **Dev** **Tools** : Visual Studio Code, Git, GitLab, GitHub
-
-HONORS AND AWARDS
-
-> • Successfully completed certification courses in [<u>Machin</u>e
-> L<u>earning</u>](https://ude.my/UC-dd60143e-7d08-43af-b057-469e3ed707bd)
-> and [<u>Dee</u>p
-> L<u>earning</u>](https://ude.my/UC-dc7e5a82-2106-4f87-8f73-1ce59455b162)
-> from Udemy.
->
-> • Received the CAP award for outstanding performance in the ESCU
-> automation project at Crest Data.
->
-> • Invited as an Expert Speaker for a 3-day workshop on "Cross-platform
-> Application Development using Flutter," organized by the IT Department
-> at Birla Vishvakarma Mahavidyalaya.

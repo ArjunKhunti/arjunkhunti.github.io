@@ -7,7 +7,7 @@
       <div class="about-image animate-fadeIn">
         <div class="image-wrapper">
           <div class="image-placeholder">
-            <img src="/assets/my_image.jpg" alt="Arjun Khunti" />
+            <img src="/assets/personal/my_image.webp" alt="Arjun Khunti" width="280" height="280" loading="lazy" />
           </div>
         </div>
       </div>
@@ -143,5 +143,25 @@
     flex-shrink: 0;
     margin-top: 2px;
     color: var(--accent-blue);
+  }
+  
+  @media (max-width: 767px) {
+    .about-content {
+      gap: var(--space-8);
+    }
+    
+    .image-wrapper {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .about-bio p {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-4);
+    }
+    
+    .highlight-item {
+      font-size: var(--text-sm);
+    }
   }
 </style>

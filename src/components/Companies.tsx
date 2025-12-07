@@ -50,6 +50,8 @@ export default function Companies() {
                                 <img
                                     src={company.logo}
                                     alt={`${company.name} logo`}
+                                    width="120"
+                                    height="80"
                                     loading="lazy"
                                 />
                             </div>

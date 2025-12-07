@@ -4,9 +4,7 @@
 
 /* Import Design System */
 @import './design-system.css';
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=MedievalSharp&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import './fonts.css';
 
 /* ===== CSS Reset ===== */
 *,
@@ -23,13 +21,27 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 body {
     font-family: var(--font-body);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     color: var(--gray-900);
-    background-color: var(--white);
+    background: linear-gradient(to bottom, var(--white) 0%, var(--gray-50) 100%);
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* ===== Typography ===== */
@@ -91,14 +103,14 @@ a:hover {
     max-width: var(--container-xl);
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--space-6);
-    padding-right: var(--space-6);
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
 }
 
 @media (min-width: 768px) {
     .container {
-        padding-left: var(--space-8);
-        padding-right: var(--space-8);
+        padding-left: var(--space-6);
+        padding-right: var(--space-6);
     }
 }
 
@@ -111,11 +123,18 @@ a:hover {
 
 /* ===== Section Spacing ===== */
 .section {
-    padding-top: var(--space-16);
-    padding-bottom: var(--space-16);
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
 }
 
 @media (min-width: 768px) {
+    .section {
+        padding-top: var(--space-16);
+        padding-bottom: var(--space-16);
+    }
+}
+
+@media (min-width: 1024px) {
     .section {
         padding-top: var(--space-24);
         padding-bottom: var(--space-24);
@@ -169,17 +188,45 @@ a:hover {
     transition: all var(--transition-base);
     text-decoration: none;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.btn:hover::after {
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .btn-primary {
     background: var(--gradient-primary);
     color: var(--white);
     box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s;
 }
 
 .btn-secondary {
@@ -200,6 +247,18 @@ a:hover {
     font-size: var(--text-lg);
 }
 
+@media (max-width: 767px) {
+    .btn {
+        padding: var(--space-3) var(--space-5);
+        font-size: var(--text-sm);
+    }
+
+    .btn-lg {
+        padding: var(--space-3) var(--space-6);
+        font-size: var(--text-base);
+    }
+}
+
 /* ===== Card Styles ===== */
 .card {
     background: var(--white);
@@ -207,11 +266,28 @@ a:hover {
     padding: var(--space-6);
     box-shadow: var(--shadow-md);
     transition: all var(--transition-base);
+    will-change: transform;
+    position: relative;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xl);
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: -1;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow);
+}
+
+.card:hover::after {
+    opacity: 0.05;
 }
 
 .card-glass {
@@ -504,6 +580,18 @@ a:hover {
 /* Companies Section Styles */
 .companies {
     background: var(--white);
+    position: relative;
+}
+
+.companies::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: radial-gradient(circle at top, rgba(116, 0, 1, 0.05), transparent);
+    pointer-events: none;
 }
 
 .companies-grid {
@@ -524,6 +612,28 @@ a:hover {
     min-height: 150px;
     transition: all var(--transition-base);
     border: 1px solid var(--gray-200);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.company-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.company-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    border-color: var(--accent-blue);
+}
+
+.company-card:hover::before {
+    opacity: 0.05;
 }
 
 .company-logo {
@@ -550,7 +660,19 @@ a:hover {
 
 /* Skills Section Styles */
 .skills {
-    background: var(--white);
+    background: var(--gray-50);
+    position: relative;
+}
+
+.skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: radial-gradient(circle at top, rgba(26, 71, 42, 0.05), transparent);
+    pointer-events: none;
 }
 
 .skills-filters {
@@ -603,11 +725,28 @@ a:hover {
     gap: var(--space-3);
     transition: all var(--transition-base);
     border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-secondary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
 }
 
 .skill-card:hover {
     border-color: var(--accent-blue);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    box-shadow: var(--shadow-xl), var(--shadow-glow-cyan);
+    transform: translateY(-6px) scale(1.05);
+}
+
+.skill-card:hover::before {
+    opacity: 0.05;
 }
 
 .skill-icon {
@@ -632,7 +771,19 @@ a:hover {
 
 /* Projects Section Styles */
 .projects {
-    background: var(--gray-50);
+    background: var(--white);
+    position: relative;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: radial-gradient(circle at top, rgba(224, 177, 62, 0.08), transparent);
+    pointer-events: none;
 }
 
 .project-filters {
@@ -662,10 +813,27 @@ a:hover {
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all var(--transition-base);
+    position: relative;
+    will-change: transform;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
 }
 
 .project-card:hover {
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-2xl), var(--shadow-glow);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.project-card:hover::after {
+    opacity: 0.03;
 }
 
 .project-image {
@@ -752,6 +920,12 @@ a:hover {
     position: relative;
 }
 
+@media (max-width: 767px) {
+    .carousel-container {
+        gap: 0;
+    }
+}
+
 .carousel-content {
     flex: 1;
     overflow: hidden;
@@ -769,6 +943,12 @@ a:hover {
     border-radius: var(--radius-xl);
     background: rgba(255, 255, 255, 0.8);
     width: 100%;
+}
+
+@media (min-width: 768px) {
+    .project-card-large {
+        padding: var(--space-6);
+    }
 }
 
 @media (min-width: 1024px) {
@@ -875,6 +1055,12 @@ a:hover {
     cursor: pointer;
     transition: all var(--transition-base);
     z-index: 10;
+}
+
+@media (max-width: 767px) {
+    .carousel-btn {
+        display: none;
+    }
 }
 
 .carousel-btn:hover {
@@ -1000,9 +1186,9 @@ a:hover {
 
 .info-card:hover {
     background: var(--white);
-    box-shadow: var(--shadow-xl), 0 0 20px rgba(59, 130, 246, 0.2);
-    transform: translateY(-5px);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+    transform: translateY(-5px) scale(1.05);
+    border: 1px solid var(--accent-blue);
 }
 
 .info-icon {
@@ -1019,8 +1205,8 @@ a:hover {
 }
 
 .info-card:hover .info-icon {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(116, 0, 1, 0.4);
 }
 
 .info-card h4 {
@@ -1037,7 +1223,7 @@ a:hover {
 }
 
 .info-card a:hover {
-    color: var(--accent-purple);
+    color: var(--accent-cyan);
 }
 
 .info-card p {

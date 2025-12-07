@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = 'Arjun Khunti - Senior Software Engineer | Full-Stack & AI Expert',
-  description = 'Portfolio of Arjun Khunti, Senior Software Engineer with 6+ years experience in Full-Stack Development, AI/ML, Python, GoLang, React, and Cloud Technologies.',
+  description = 'Senior Software Engineer with 6+ years in Full-Stack Development, AI/ML, Python, GoLang, React, and Cloud Technologies.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -28,9 +28,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <meta name="keywords" content="Software Engineer, Full-Stack Developer, Python, GoLang, React, AI, Machine Learning, Cloud, AWS, Kubernetes, Arjun Khunti" />
     <meta name="author" content="Arjun Khunti" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#740001" />
+    
+    <!-- Mobile Web App Capability -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Arjun Khunti" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Security Headers -->
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; frame-ancestors 'none';" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -46,9 +64,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL('/og-image.png', Astro.site)} />
     
-    <!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preload Critical Fonts (Local) -->
+    <link rel="preload" href="/fonts/cinzel-v26-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/medievalsharp-v28-400.ttf" as="font" type="font/ttf" crossorigin />
+
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">

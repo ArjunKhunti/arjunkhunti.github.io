@@ -1,0 +1,40 @@
+---
+import { COMPANIES } from '../utils/constants';
+---
+
+<section class="companies section" id="companies">
+    <div class="container">
+        <h2 class="section-title text-center">Companies I've Worked With</h2>
+        <p class="section-subtitle text-center">
+            Trusted by leading organizations in cybersecurity and technology
+        </p>
+
+        <div class="companies-grid">
+            {COMPANIES.map((company) => (
+                <div class="company-card">
+                    <div class="company-logo">
+                        <img
+                            src={company.logo}
+                            alt={`${company.name} logo`}
+                            width="120"
+                            height="80"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    /* CSS animations to mimic Framer Motion's entry effect */
+    .company-card {
+        /* Already styled in global.css, ensuring transition exists */
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    
+    .company-card:hover {
+        transform: translateY(-5px) scale(1.05); 
+    }
+</style>

@@ -22,7 +22,7 @@ import { PERSONAL_INFO, TYPING_SKILLS } from '../utils/constants';
             <span>View Spellbook</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
           </a>
-          <a href={PERSONAL_INFO.resumeUrl} download="Arjun_Khunti_Resume.pdf" class="btn btn-secondary">
+          <a href={PERSONAL_INFO.resumeUrl} download="Arjun_Khunti_Senior_Software_Engineer.pdf" class="btn btn-secondary">
             <span>Download Scroll</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           </a>
@@ -32,7 +32,7 @@ import { PERSONAL_INFO, TYPING_SKILLS } from '../utils/constants';
       <div class="hero-image animate-float">
         <div class="image-wrapper">
           <div class="wizard-circle"></div>
-          <img src="/assets/profile.png" alt={PERSONAL_INFO.name} />
+          <img src="/assets/profile.webp" alt={PERSONAL_INFO.name} width="400" height="400" loading="eager" />
         </div>
       </div>
     </div>
@@ -181,18 +181,40 @@ import { PERSONAL_INFO, TYPING_SKILLS } from '../utils/constants';
   
   @media (max-width: 767px) {
     .hero {
-      padding-top: 100px;
+      min-height: 80vh;
+      padding-top: 80px;
+      padding-bottom: var(--space-8);
     }
     
-    .hero-cta {
+    .hero-content {
+      gap: var(--space-8);
+    }
+    
+    .greeting {
+      font-size: var(--text-base);
+    }
+    
+    .description {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-6);
+    }
+    
+    .hero-actions {
       flex-direction: column;
-      align-items: stretch;
-    }
-    
-    .btn {
       width: 100%;
     }
+    
+    .hero-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .image-wrapper {
+      width: 240px;
+      height: 240px;
+    }
   }
+
 </style>
 
 <script define:vars={{ skills: TYPING_SKILLS }}>

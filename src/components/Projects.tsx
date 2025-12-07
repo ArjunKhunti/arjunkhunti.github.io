@@ -1,9 +1,11 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { PROJECTS } from '../utils/constants';
 
 export default function Projects() {
     const [activeIndex, setActiveIndex] = useState(0);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     const nextProject = () => {
         setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
@@ -11,6 +13,25 @@ export default function Projects() {
 
     const prevProject = () => {
         setActiveIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
+    };
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        if (touchStartX.current - touchEndX.current > 50) {
+            // Swiped left - go to next
+            nextProject();
+        }
+        if (touchStartX.current - touchEndX.current < -50) {
+            // Swiped right - go to previous
+            prevProject();
+        }
     };
 
     const currentProject = PROJECTS[activeIndex];
@@ -28,7 +49,12 @@ export default function Projects() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
 
-                    <div className="carousel-content">
+                    <div
+                        className="carousel-content"
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
                         <AnimatePresence mode='wait'>
                             <motion.div
                                 key={currentProject.id}
@@ -36,7 +62,12 @@ export default function Projects() {
                                 initial={{ opacity: 0, x: 100 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -100 }}
-                                transition={{ duration: 0.5 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30,
+                                    mass: 0.8
+                                }}
                             >
                                 <div className="project-image-large">
                                     <div className="image-placeholder-large">
